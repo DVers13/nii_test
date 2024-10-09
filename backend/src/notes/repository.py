@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Sequence
 from fastapi import HTTPException
 from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -20,6 +20,10 @@ class NoteRepository:
         await self.session.refresh(new_note)
         return NoteOutput(id=new_note.id, title=new_note.title,
                           body=new_note.body)
+
+    async def get_all(self) -> Sequence[NoteOutput]:
+        result = await self.session.execute(select(Note).order_by(Note.id))
+        return result.scalars().all()
 
     async def get_note_by_id(self, note_id: int) -> NoteOutput:
         stmt = select(Note).where(Note.id == note_id)
