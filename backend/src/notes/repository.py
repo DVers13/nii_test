@@ -1,5 +1,4 @@
 from typing import Sequence
-from fastapi import HTTPException
 from sqlalchemy import select, update, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 from notes.models import Note
@@ -25,14 +24,6 @@ class NoteRepository:
         result = await self.session.execute(select(Note).order_by(Note.id))
         return result.scalars().all()
 
-    async def get_note_by_id(self, note_id: int) -> NoteOutput:
-        stmt = select(Note).where(Note.id == note_id)
-        result = await self.session.execute(stmt)
-        result = result.scalar()
-        if not result:
-            raise HTTPException(status_code=404, detail="Note not found")
-        return NoteOutput(id=result.id, title=result.title, body=result.body)
-
     async def update_note(self, note_id: int, update_data: NoteInput):
         stmt = (update(Note)
                 .where(Note.id == note_id)
@@ -41,7 +32,7 @@ class NoteRepository:
         await self.session.commit()
         return True
 
-    async def delete_note_by_id(self, note_id: int) -> bool:
+    async def delete_note_by_id(self, note_id: int):
         stmt = delete(Note).where(Note.id == note_id)
         await self.session.execute(stmt)
         await self.session.commit()

@@ -18,13 +18,6 @@ async def create_note(note: NoteInput,
     return await _repository.create_note(note)
 
 
-@router.get("/{note_id}", response_model=NoteOutput)
-async def get_note_by_id(note_id: int,
-                         session: AsyncSession = Depends(get_async_session)):
-    _repository = NoteRepository(session=session)
-    return await _repository.get_note_by_id(note_id)
-
-
 @router.get("/", response_model=Sequence[NoteOutput])
 async def get_all(session: AsyncSession = Depends(get_async_session)):
     _repository = NoteRepository(session=session)

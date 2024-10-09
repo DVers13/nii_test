@@ -3,20 +3,21 @@ import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import App from './App.vue'
 
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createWebHistory, createRouter } from 'vue-router'
 
 import AddNote from './components/AddNote.vue'
-import UpdateNote from './components/UpdateNote.vue'
+import CurrentNote from './components/CurrentNote.vue'
 import HomePage from './components/HomePage.vue'
 
 const routes = [
-    { path: '/', component: HomePage },
-    { path: '/update/:id', name: 'update', component: UpdateNote },
-    { path: '/add', component: AddNote },
+    { path: '/', redirect: '/notes' },
+    { path: '/notes', name: 'home', component: HomePage },
+    { path: '/notes/:id', name: 'current', component: CurrentNote },
+    { path: '/notes/add', name: 'add', component: AddNote },
 ]
 
 const router = createRouter({
-    history: createMemoryHistory(),
+    history: createWebHistory(),
     routes,
 })
 

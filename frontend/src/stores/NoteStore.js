@@ -25,14 +25,14 @@ export const useNoteStore = defineStore('noteStore', {
             this.notes.splice(index, 1)
         },
         updateNote(new_note) {
-            apiClient.put(`/notes/`, {'title': new_note.title, 'body': new_note.body}, {
+            apiClient.put(`/notes/`, { 'title': new_note.title, 'body': new_note.body }, {
                 params: {
                     'note_id': new_note.id
                 }
             })
         },
-        addNote(new_note){
-            apiClient.post(`/notes/`, {'title': new_note.title, 'body': new_note.body})
+        addNote(new_note) {
+            apiClient.post(`/notes/`, { 'title': new_note.title, 'body': new_note.body })
         }
     },
 })
