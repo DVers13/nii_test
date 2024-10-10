@@ -21,7 +21,7 @@ export default {
         <textarea class="title" type="text" @click="flag_create = false" v-model="current_note.title"
             placeholder="title" />
         <textarea class="body" type="text" @click="flag_create = false" v-model="current_note.body" placeholder="body" />
-        <button class="icon_button" @click="NoteStore.addNote(current_note); flag_create = !flag_create"><i
+        <button class="icon_button" @click="NoteStore.addNote(current_note); flag_create = true"><i
                 class="fa fa-plus-square-o" aria-hidden="true"></i> Add Note</button>
         <h1 v-if="flag_create" class="text">Заметка создана</h1>
     </div>

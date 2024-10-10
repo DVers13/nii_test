@@ -5,7 +5,7 @@
         <div class="action">
             <RouterLink class="icon_button" :to="{ name: 'current', params: { id: index } }"><i
                     class="fa fa-pencil"></i></RouterLink>
-            <button class="icon_button" @click="NoteStore.deleteNote(note.id, index)"><i
+            <button class="icon_button del" @click="NoteStore.deleteNote(note.id, index)"><i
                     class="fa fa-trash"></i></button>
         </div>
     </div>

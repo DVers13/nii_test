@@ -6,7 +6,7 @@ export default {
     data() {
         return {
             NoteStore: useNoteStore(),
-            current_note: [],
+            current_note: null,
             id: this.$route.params.id,
             flag_update: false
         }
@@ -15,7 +15,7 @@ export default {
 
     },
     created() {
-        this.current_note = this.NoteStore.notes[this.id]
+        this.current_note = this.NoteStore.notes[this.id] || null;
     }
 }
 
@@ -24,12 +24,12 @@ export default {
 <template>
     <div class="container edit">
         <h1 class="text">Редактирование заметки</h1>
-        <textarea class="title" type="text" @click="flag_update = false" v-model="current_note.title"
+        <textarea v-if="current_note" class="title" type="text" @click="flag_update = false" v-model="current_note.title"
             placeholder="title" />
-        <textarea class="body" type="text" @click="flag_update = false" v-model="current_note.body" placeholder="body" />
-        <button class="icon_button" @click="NoteStore.updateNote(current_note); flag_update = !flag_update"><i
+        <textarea v-if="current_note" class="body" type="text" @click="flag_update = false" v-model="current_note.body" placeholder="body" />
+        <button class="icon_button" @click="NoteStore.updateNote(current_note); flag_update = true"><i
                 class="fa fa-refresh" aria-hidden="true"></i> Refresh</button>
-        <h1 v-if="flag_update" class="text">Заметка обновлена</h1>
+        <h1 v-if="flag_update" class="text update">Заметка обновлена</h1>
     </div>
 </template>
 
