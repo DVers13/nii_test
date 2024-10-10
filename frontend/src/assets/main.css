@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #1b1b1e;
+    display: flex;
+}
+
+#app{
+    width: 100%;
+  }
+.container {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.icon_button{
+    background-color: DodgerBlue; 
+    border: none; 
+    color: white; 
+    padding: 12px 16px; 
+    font-size: 16px; 
+    cursor: pointer; 
+}
+  .icon_button:hover {
+    background-color: RoyalBlue;
+  }
